@@ -41,6 +41,7 @@ const DashboardPage = () => {
               <div className="flex flex-col pl-6 space-y-2">
                 <Link to="/dashboard/seeAllTemplates" className="hover:text-gray-300">Ver todas las plantillas</Link>
                 <Link to="/dashboard/createTemplate" className="hover:text-gray-300">Crear Plantilla</Link>
+                <Link to="/dashboard/metricsTemplates" className="hover:text-gray-300">Metricas de plantillas</Link>
               </div>
             )}
           </div>
@@ -67,7 +68,7 @@ const DashboardPage = () => {
             <span>Cerrar Sesión</span>
           </div>
         </div>
-        <div className="col-span-10 p-4">
+        <div className="col-span-10 p-4 overflow-scroll">
           <Outlet />
         </div>
       </div>
