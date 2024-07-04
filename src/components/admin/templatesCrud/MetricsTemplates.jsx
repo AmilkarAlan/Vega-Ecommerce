@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 const localURL = "http://localhost:3001/reviews"
-const URL = ""
+const URL = "https://pf-backend-ecommerce-dfya.onrender.com/reviews"
 
 const MetricsTemplates = () => {
     const [chartData, setChartData] = useState(null);
