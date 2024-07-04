@@ -17,9 +17,9 @@ const Navbar = () => {
   const isAuthenticated = useSelector((state) => state.user.loggedIn);
   const user = useSelector((state) => state.user.userInfo);
 
-  const [searchString, setSearchString] = useState("");
-  const [showProfileMenu, setShowProfileMenu] = useState(false);
-
+  const [ searchString, setSearchString ] = useState("");
+  const [ showProfileMenu, setShowProfileMenu ] = useState(false);
+  const [ isAdmin, setIsAdmin ] = useState(false)
   const handleChange = (event) => {
     event.preventDefault();
     setSearchString(event.target.value);
@@ -28,8 +28,13 @@ const Navbar = () => {
   useEffect(() => {
     dispatch(viewCart());
     setShowProfileMenu(false)
-  }, [dispatch, navigate]);
-
+  }, [ dispatch, navigate ]);
+  useEffect(() => {
+    if (user.isAdmin) {
+      setIsAdmin(true)
+    }
+    return
+  }, [ user ]);
   useEffect(() => {
     const handleClickOutside = (event) => {
       const menu = document.getElementById("profileMenu");
@@ -47,7 +52,7 @@ const Navbar = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showProfileMenu]);
+  }, [ showProfileMenu ]);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -80,7 +85,7 @@ const Navbar = () => {
               <div className="flex flex-col items-center space-y+15 mt-5">
                 <Link to="/Home">
                   <img
-                    src={logo}
+                    src={ logo }
                     alt="logo ReactiveMind"
                     className="w-[52px] h-[52px] transform hover:rotate-90 transition-transform duration-300 ease-in-out"
                   />
@@ -98,17 +103,17 @@ const Navbar = () => {
               SOBRE NOSOTROS
             </Link>
           </div>
-          <Searchbar handleChange={handleChange} handleSearch={handleSearch} />
-          {isAuthenticated ? (
+          <Searchbar handleChange={ handleChange } handleSearch={ handleSearch } />
+          { isAuthenticated ? (
             <div className="hidden md:block relative">
               <div className="ml-4 flex items-center md:ml-6">
                 <div className="relative">
                   <button
-                    onClick={toggleProfileMenu}
+                    onClick={ toggleProfileMenu }
                     className="bg-slate-800 border-[1px] border-slate-800 font-inter text-gray-800 px-3 py-2 rounded-md text-sm font-medium mr-8 flex items-center"
                   >
                     <span className="mr-2 sm:mr-4 sm:ml-0 text-white">
-                      Hola, {user.name}
+                      Hola, { user.name }
                     </span>
                     <svg
                       className="ml-2"
@@ -124,19 +129,19 @@ const Navbar = () => {
                       />
                     </svg>
                   </button>
-                  {showProfileMenu && (
+                  { showProfileMenu && (
                     <div id="profileMenu" className="absolute right-6 mt-2 w-64 bg-white rounded-md border border-gray-200 shadow-lg z-50">
                       <div className="flex items-center p-4">
                         <img
-                          src={user.imagen ? user.imagen : defaultImage}
+                          src={ user.imagen ? user.imagen : defaultImage }
                           alt="Foto de perfil"
                           className="w-10 h-10 rounded-full mr-4"
                         />
                         <div>
                           <p className="text-gray-800 font-medium">
-                            {user.name} {user.lastname}
+                            { user.name } { user.lastname }
                           </p>
-                          <p className="text-gray-500 text-sm">{user.email}</p>
+                          <p className="text-gray-500 text-sm">{ user.email }</p>
                         </div>
                       </div>
                       <Link
@@ -151,15 +156,20 @@ const Navbar = () => {
                       >
                         Mis Favoritos
                       </Link>
+                      { isAdmin ? (
+                        <Link to="/dashboard" className="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100">
+                          Dashboard
+                        </Link>
+                      ) : null }
                       <button
-                        onClick={handleLogout}
+                        onClick={ handleLogout }
                         className="block w-full text-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
                         Cerrar sesión
                       </button>
                     </div>
 
-                  )}
+                  ) }
                 </div>
                 <Link to="/favorites">
                   <svg
@@ -189,10 +199,10 @@ const Navbar = () => {
                 </Link>
               </div>
             </div>
-          )}
+          ) }
           <Link to="/cartPage">
             <img
-              src={bag}
+              src={ bag }
               alt="logo ReactiveMind"
               className="w-[40px] h-[40px] mr-12 transform hover:scale-125 transition-transform duration-300 cursor-pointer"
             />
