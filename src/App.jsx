@@ -41,7 +41,7 @@ function App() {
   return (
     <div>
       <ToastContainer />
-      { pathname !== "/" || pathname !== "/dashboard" && <Navbar /> }
+      { pathname !== "/" && pathname !== "/dashboard" && <Navbar /> }
       <AuthContextProvider>
         <Routes>
           <Route path='/' element={ <Landing /> } />
