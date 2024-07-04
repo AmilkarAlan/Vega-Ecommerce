@@ -2,7 +2,7 @@ import axios from 'axios';
 import { GET_REVIEWS_USER, GET_REVIEWS_TEMPLATE, DELETE_REVIEW, UPDATE_REVIEW } from './action-types';
 
 const localURL = "http://localhost:3001/reviews"
-const URL = ""
+const URL = "https://pf-front-end-ecommerce-vega.vercel.app/reviews"
 
 export const getReviewsUser = () => {
     return async (dispatch)=>{
