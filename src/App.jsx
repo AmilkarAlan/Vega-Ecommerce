@@ -40,7 +40,7 @@ function App() {
   return (
     <div>
        <ToastContainer />
-      {isNotAdminRoute && <Navbar />}
+      {pathname !== "/" && <Navbar />}
       <AuthContextProvider>
         <Routes>
           <Route path='/' element={<Landing />} />
