@@ -18,7 +18,6 @@ import CreateTemplate from './components/admin/templatesCrud/CreateTemplate.jsx'
 import UpdateTemplate from './components/admin/templatesCrud/UpdateTemplate.jsx';
 import MetricsTemplates from './components/admin/templatesCrud/MetricsTemplates.jsx';
 
-
 import ActivateUserByEmail from './components/admin/userCrud/ActivateUserByEmail.jsx';
 import CreateAdminUser from './components/admin/userCrud/createAdminUser.jsx';
 import ViewUsers from './components/admin/userCrud/seeAllUsers.jsx';
@@ -35,13 +34,12 @@ import DashboardPage from './components/admin/dashboardPage/DashboardPage.jsx';
 function App() {
   const { pathname } = useLocation();
 
-
-  const isNotAdminRoute = pathname !== '/admin';
+  const showNavbar = pathname !== '/' && !pathname.startsWith('/dashboard');
 
   return (
     <div>
       <ToastContainer />
-      { pathname !== "/" && pathname !== "/dashboard" && <Navbar /> }
+      { showNavbar && <Navbar /> }
       <AuthContextProvider>
         <Routes>
           <Route path='/' element={ <Landing /> } />
