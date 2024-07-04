@@ -71,7 +71,7 @@ export function logWhitFirebase(userInfo) {
 export function signup(userForm) {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${localURL}/register`, userForm);
+      const response = await axios.post(`${URL || localURL}/register`, userForm);
       console.log(response);
       return response;
     } catch (error) {
@@ -88,7 +88,7 @@ export const fetchProfile = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const { data } = await axios.get(`${localURL}/profile`, {
+      const { data } = await axios.get(`${URL || localURL}/profile`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
