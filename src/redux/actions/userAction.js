@@ -108,7 +108,7 @@ export const updateProfile = (updatedProfileData) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put(`${localURL}/profile`, updatedProfileData, {
+      const response = await axios.put(`${URL || localURL}/profile`, updatedProfileData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -136,7 +136,7 @@ export const changePassword = (currentPassword, newPassword) => async (dispatch)
 
   try {
     const token = localStorage.getItem('token');
-    const res = await axios.post(`${localURL}/change-password`, { currentPassword, newPassword }, {
+    const res = await axios.post(`${URL || localURL}/change-password`, { currentPassword, newPassword }, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
