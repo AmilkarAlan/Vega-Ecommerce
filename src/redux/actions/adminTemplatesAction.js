@@ -8,7 +8,7 @@ import {
   DELETE_TEMPLATE_FAILURE,
 } from './action-types';
 
-const localURL = 'http://localhost:3001/admin/templates';
+const localURL = 'https://pf-backend-ecommerce-dfya.onrender.com/admin/templates';
 
 export const getAllTemplates = () => async (dispatch) => {
   dispatch({ type: GET_ALL_TEMPLATES_REQUEST });
